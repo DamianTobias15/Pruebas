@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="C:/Selenium/sele/libs/okhttp-3.10.0.jar"/>
 	<classpathentry kind="lib" path="C:/Selenium/sele/libs/okio-1.14.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/et77237/Downloads/commons-io-2.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/et77237/Downloads/Librerias/jxl-2.6.12.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
