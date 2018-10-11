@@ -35,9 +35,12 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LoggOn {
-
+	
+	public static final String RUTA = "C:\\Users\\et77237\\Documents\\qerys\\SeleniumUat.xlsx";
 	 WebDriver driver ;
 	 
 	public LoggOn() {
@@ -57,7 +60,7 @@ public class LoggOn {
 	public  WebDriver  cargarBrowser () {
 		WebElement elemento ;
 		
-		String filename = "SeleniumUat.xls";
+	
 		
 		
 			 // abrir navegador 
@@ -66,27 +69,31 @@ public class LoggOn {
 		
 			try {
 				
-				List sheetData = new ArrayList();
-				FileInputStream fis = null;
+				File src = new File (RUTA);
+				FileInputStream fis = new FileInputStream(src);
+				XSSFWorkbook wb = new XSSFWorkbook(fis);
+				XSSFSheet sheet1 = wb.getSheetAt(1);
 				
-				fis = new FileInputStream(filename);
-				HSSFWorkbook workbook = new HSSFWorkbook(fis);
-				HSSFSheet sheet = workbook.getSheetAt(0);
+				String var1 = (sheet1.getRow(1).getCell(1).getStringCellValue());
+	
 				
 				
-				HSSFWorkbook workbook1  = Workbook.getWorkbook(new File("C:\\Users\\et77237\\Documents\\qerys\\SeleniumUat.xlsx")); //Pasamos el excel que vamos a leer
-				HSSFSheet sheet = workbook1.getSheet("UserTransaccions"); //Seleccionamos la hoja que vamos a leer
+				// se realiza el ingreso deu usuario 
+				driver.findElement(By.name("username1")).click();
+				driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(0).getRawValue().toString());
+				takeScreenShotTest(driver, "LoggOn");
+				// se realiza el ingreso del password 
+				driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
+				driver.findElement(By.id("textFirma")).sendKeys(sheet1.getRow(1).getCell(1).getStringCellValue());
+				driver.findElement(By.id("enterId")).click();
+				driver.findElement(By.id("link_lkTransfers")).click();
+				
+						
+				
+				
+				
 			
-				
-				
-					for (int fila = 1; fila < sheet.getRows(); fila++) { //recorremos las filas
-						 //agregar  los elementos del login	
-				System.out.print(fila);		
-				driver.findElement(By.name("username1")).click();		
-				driver.findElement(By.name("username1")).sendKeys(sheet.getCell(1, fila).getContents());	
-				
-				driver.quit();
-					} 
+					
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
