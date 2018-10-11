@@ -1,6 +1,7 @@
 package mergeSort;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,8 @@ import jxl.Workbook;
 import org.openqa.selenium.TakesScreenshot;
 //import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 
 
@@ -29,6 +32,7 @@ import org.apache.commons.io.FileUtils;
 
 public class mergeSort  {
 	
+	public static final String RUTA = "C:\\Users\\et77237\\Documents\\qerys\\SeleniumUat.xlsx";
 	 WebDriver driver ;
 		
 		public void mergeSort(){
@@ -70,24 +74,26 @@ public class mergeSort  {
 				
 				try {
 
-						Workbook workbook  = Workbook.getWorkbook(new File("C:\\Users\\et77237\\Documents\\qerys")); //Pasamos el excel que vamos a leer
-						Sheet sheet = workbook.getSheet("Transaccione"); //Seleccionamos la hoja que vamos a leer
-				
-						String firstName; 
-						System.out.print(sheet.getRows());
+
+					File src = new File (RUTA);
+					FileInputStream fis = new FileInputStream(src);
+					XSSFWorkbook wb = new XSSFWorkbook(fis);
+					XSSFSheet sheet1 = wb.getSheetAt(1);
+					
+					String var1 = (sheet1.getRow(1).getCell(1).getStringCellValue());
 				
 						//garantiza las mismas condicones como la primera dentro del mismo ciclo
 					
-							for (int fila = 1; fila < sheet.getRows(); fila++) { //recorremos las filas
+							//for (int fila = 1; fila < sheet1.getRows(); fila++) { //recorremos las filas
 							//menu.mnuRegisterLink().click();
 								driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 							
 								driver.findElement(By.id("sourceInstanceID-button")).click();				
 								driver.findElement(By.xpath("//*[@id='sourceInstanceID-menu']/li[2]/span")).click();
 								scrollUniversal();
-								driver.findElement(By.id("sourceInstanceID-menu-option-2")).sendKeys(sheet.getCell(1, fila).getContents());							
+								//driver.findElement(By.id("sourceInstanceID-menu-option-2")).sendKeys(sheet1.getCell(1, fila).getContents());							
 								Thread.sleep(3000);		
-								}
+								//}
 					}catch(Exception e){
 						takeScreenShotTest(driver, "ErrorExcel");
 						driver.findElement(By.id("link_logout")).click();
