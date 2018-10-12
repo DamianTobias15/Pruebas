@@ -158,5 +158,66 @@ public class LoggOn {
 		
 	}
 
+	
+	public void transaccionPropiasLoggOn(String user, String password){
+		
+		driver.findElement(By.name("username1")).click();
+		driver.findElement(By.name("username1")).sendKeys(user);
+		takeScreenShotTest(driver, "LoggOn");
+		// se realiza el ingreso del password 
+		driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
+		driver.findElement(By.id("textFirma")).sendKeys(password);
+		driver.findElement(By.id("enterId")).click();
+		driver.findElement(By.id("link_lkTransfers")).click();
+		
+		
+		
+	}
+	
+	public void transaccionPropias (String cuentaOrigen, String cuentaDestino){
+		try {
+			
+			
+		// ComboBoxx captura de de pantalla  Cuenta de Origen 
+		driver.findElement(By.id("sourceInstanceID-button")).click();	
+		//posible sendskeys  ya que no se tenia ambiente 
+		driver.findElement(By.id("sourceInstanceID-button")).sendKeys(cuentaOrigen);
+	
+		
+		//driver.findElement(By.xpath("//*[@id='sourceInstanceID-menu']/li[2]/span")).click();
+		scrollUniversal ();			
+		takeScreenShotTest(driver, "CuentaOrigen");
+		//driver.findElement(By.id("sourceInstanceID-menu-option-2")).click();							
+		
+			Thread.sleep(3000);
+	
+			
+		// ComboBoxx captura de de pantalla  Cuenta Destino
+		driver.findElement(By.id("destinationInstanceID-button")).click();	
+		driver.findElement(By.id("destinationInstanceID-button")).sendKeys(cuentaDestino);
+		
+	//	driver.findElement(By.xpath("//*[@id='destinationInstanceID-menu']/li[2]/span")).click();
+	//  driver.findElement(By.xpath("//*[@id='destinationInstanceID-menu-option-1']/span")).click();	
+		takeScreenShotTest(driver, "Transacciones");
+		Thread.sleep(6000);
+		
+		// clic en el boton continuar 
+		driver.findElement(By.id("cN-primaryNavEnabled")).click();
+		Thread.sleep(2000);
+		// monto 
+		driver.findElement(By.id("Debit-withtext")).sendKeys("75");;
+		Thread.sleep(2000);
+		scrollUniversal();
+		driver.findElement(By.id("InternalTransfer_NextLink_Enabled")).click();					
+		Thread.sleep(4000);
+		scrollUniversal();
+		takeScreenShotTest(driver, "TXN");
+		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	} 
 
 }
