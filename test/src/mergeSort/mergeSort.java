@@ -84,8 +84,10 @@ public class mergeSort  {
 				
 						//garantiza las mismas condicones como la primera dentro del mismo ciclo
 					
-							//for (int fila = 1; fila < sheet1.getRows(); fila++) { //recorremos las filas
-							//menu.mnuRegisterLink().click();
+					//Recorrer el eexcel 
+							//for (int fila = 1; fila < sheet1.getFirstRowNum(); fila++) { //recorremos las filas
+								//System.out.println(sheet1);
+								
 								driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
 							
 								driver.findElement(By.id("sourceInstanceID-button")).click();				

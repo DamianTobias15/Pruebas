@@ -52,6 +52,7 @@ public class LoggOn {
 		
 		LoggOn u = new LoggOn();
 		u.cargarBrowser();
+	
 		
 		
 
@@ -84,10 +85,14 @@ public class LoggOn {
 				// se realiza el ingreso deu usuario 
 				driver.findElement(By.name("username1")).click();
 				driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(0).getRawValue().toString());
+				String user = (sheet1.getRow(1).getCell(0).getStringCellValue().toString());
+				System.out.println(user);
 				takeScreenShotTest(driver, "LoggOn");
 				// se realiza el ingreso del password 
 				driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
-				driver.findElement(By.id("textFirma")).sendKeys(sheet1.getRow(1).getCell(1).getStringCellValue());
+				driver.findElement(By.id("textFirma")).sendKeys(sheet1.getRow(1).getCell(1).getRawValue().toString());
+				String password = (sheet1.getRow(1).getCell(1).getStringCellValue().toString());
+				System.out.println(password);
 				driver.findElement(By.id("enterId")).click();
 				driver.findElement(By.id("link_lkTransfers")).click();
 				
@@ -96,8 +101,10 @@ public class LoggOn {
 						
 						// se realiza el ingreso deu usuario 
 						driver.findElement(By.name("username1")).click();
-						driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(4).getCell(0).getRawValue().toString());
+						driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(1).getRawValue().toString());
 						takeScreenShotTest(driver, "LoggOn");
+						System.out.println(sheet1.getRow(4).getCell(0).getRawValue().toString());
+						
 						// se realiza el ingreso del password 
 						driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
 						driver.findElement(By.id("textFirma")).sendKeys(sheet1.getRow(4).getCell(1).getStringCellValue());
@@ -174,7 +181,7 @@ public class LoggOn {
 		
 	}
 	
-	public void transaccionPropias (String cuentaOrigen, String cuentaDestino){
+	public  void transaccionPropias (String cuentaOrigen, String cuentaDestino){
 		try {
 			
 			
