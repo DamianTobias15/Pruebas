@@ -44,7 +44,7 @@ public class LoggOn {
 	 WebDriver driver ;
 	 
 	public LoggOn() {
-		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chrom241\\chromedriver.exe");	  
+		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\AllLibreries\\chrom241\\chromedriver.exe");	  
 		driver = new ChromeDriver();
 	} 
 	
@@ -65,6 +65,8 @@ public class LoggOn {
 		
 		
 			 // abrir navegador 
+		//driver.get("https://www.google.com");
+	
 		driver.get("https://uat4.bancapersonal.banamex.com/MXGCB/JPS/portal/Index.do");
 		driver.findElement(By.id("splash-207555-close-button")).click();
 		
@@ -82,23 +84,27 @@ public class LoggOn {
 				System.out.println(varCom + varSheet);
 				
 					if (varCom==varSheet)   {
+						
 				// se realiza el ingreso deu usuario 
 				driver.findElement(By.name("username1")).click();
-				driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(0).getRawValue().toString());
 				String user = (sheet1.getRow(1).getCell(0).getStringCellValue().toString());
+				driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(0).getStringCellValue().toString());
+				
 				System.out.println(user);
 				takeScreenShotTest(driver, "LoggOn");
+				
+				
 				// se realiza el ingreso del password 
 				driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
-				driver.findElement(By.id("textFirma")).sendKeys(sheet1.getRow(1).getCell(1).getRawValue().toString());
 				String password = (sheet1.getRow(1).getCell(1).getStringCellValue().toString());
+				driver.findElement(By.xpath("//*[@id='textFirma']")).sendKeys(sheet1.getRow(1).getCell(1).getStringCellValue().toString());
 				System.out.println(password);
 				driver.findElement(By.id("enterId")).click();
 				driver.findElement(By.id("link_lkTransfers")).click();
 				
 					}
 					else {
-						
+						// login diferente a cuenta 1 
 						// se realiza el ingreso deu usuario 
 						driver.findElement(By.name("username1")).click();
 						driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(1).getRawValue().toString());

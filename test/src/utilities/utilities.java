@@ -48,7 +48,7 @@ public class utilities {
 	 static WebDriver driver ;
 	 
 // este metodo se utliza para cargar el browser 
-		public  static void cargarBrowser () {
+		public  static WebDriver cargarBrowser () {
 			
 			System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\AllLibreries\\chrom241\\chromedriver.exe"); 
 
@@ -59,6 +59,8 @@ public class utilities {
 		driver.findElement(By.id("splash-207555-close-button")).click();
 		// agregar que se maximizar la pantalla 
 		
+		return driver;
+		
 		
 	
 		}
@@ -68,6 +70,35 @@ public class utilities {
 			driver.manage().timeouts().implicitlyWait(time, TimeUnit.SECONDS); 
 			} 
 
+//Capturas de pantalla 
+		public static  void takeScreenShotTest(WebDriver driver, String imageName) {
+		      //Directorio donde quedaran las imagenes guardadas
+		      File directory = new File("C:\\Users\\et77237\\Documents\\ScreenShot");
+		 
+		      try {
+		         if (directory.isDirectory()) {
+		            //Toma la captura de imagen
+		            File imagen = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		            //Mueve el archivo a la carga especificada con el respectivo nombre
+		            FileUtils.copyFile(imagen, new File(directory.getAbsolutePath()   + "\\" + imageName + ".png"));
+		         } else {
+		            //Se lanza la excepcion cuando no encuentre el directorio
+		            throw new IOException("ERROR : La ruta especificada no es un directorio!");
+		         }
+		      } catch (IOException e) {
+		         //Impresion de Excepciones
+		         e.printStackTrace();
+		      }
+		   }
+			
+//Scroll universal 
+		public  void scrollUniversal (){
+					
+			JavascriptExecutor js= (JavascriptExecutor) driver;
+			js.executeScript("window.scrollBy(0, 500);");
+			
+		}
+		
 	
 
 }
