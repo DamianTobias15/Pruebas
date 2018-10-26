@@ -84,23 +84,27 @@ public class LoggOn {
 				System.out.println(varCom + varSheet);
 				
 					if (varCom==varSheet)   {
+						for (int i = 1; i < sheet1.getLastRowNum(); i++)
+						{ //recorremos las filas
+						driver.findElement(By.name("username1")).click();
+						String user = (sheet1.getRow(i).getCell(0).getStringCellValue().toString());
+						driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(i).getCell(0).getStringCellValue().toString());
+						System.out.println(user);
+						takeScreenShotTest(driver, "LoggOn" + i);
 						
-				// se realiza el ingreso deu usuario 
-				driver.findElement(By.name("username1")).click();
-				String user = (sheet1.getRow(1).getCell(0).getStringCellValue().toString());
-				driver.findElement(By.name("username1")).sendKeys(sheet1.getRow(1).getCell(0).getStringCellValue().toString());
-				
-				System.out.println(user);
-				takeScreenShotTest(driver, "LoggOn");
-				
-				
-				// se realiza el ingreso del password 
-				driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
-				String password = (sheet1.getRow(1).getCell(1).getStringCellValue().toString());
-				driver.findElement(By.xpath("//*[@id='textFirma']")).sendKeys(sheet1.getRow(1).getCell(1).getStringCellValue().toString());
-				System.out.println(password);
-				driver.findElement(By.id("enterId")).click();
-				driver.findElement(By.id("link_lkTransfers")).click();
+						
+						// se realiza el ingreso del password 
+						driver.findElement(By.xpath("//*[@id='content65']/div[2]/div[2]/a")).click();
+						String password = (sheet1.getRow(i).getCell(1).getStringCellValue().toString());
+						driver.findElement(By.xpath("//*[@id='textFirma']")).sendKeys(sheet1.getRow(i).getCell(1).getStringCellValue().toString());
+						System.out.println(password);
+						driver.findElement(By.id("enterId")).click();
+						driver.findElement(By.id("link_lkTransfers")).click();
+						
+						///Pruebas de autentificacion de todos los usuarios 
+						driver.findElement(By.id("link_logout" + i)).click();
+						driver.quit();
+						}
 				
 					}
 					else {
@@ -172,7 +176,7 @@ public class LoggOn {
 	}
 
 	
-	public void transaccionPropiasLoggOn(String user, String password){
+	/*public void transaccionPropiasLoggOn(String user, String password){
 		
 		driver.findElement(By.name("username1")).click();
 		driver.findElement(By.name("username1")).sendKeys(user);
@@ -185,7 +189,7 @@ public class LoggOn {
 		
 		
 		
-	}
+	}*/
 	
 	public  void transaccionPropias (String cuentaOrigen, String cuentaDestino){
 		try {

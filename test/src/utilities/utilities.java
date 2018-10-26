@@ -52,7 +52,7 @@ public class utilities {
 			
 			System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\AllLibreries\\chrom241\\chromedriver.exe"); 
 
-		 WebDriver driver = new ChromeDriver();
+		  driver = new ChromeDriver();
 			 // abrir navegador 
 		driver.get("https://uat4.bancapersonal.banamex.com/MXGCB/JPS/portal/Index.do");
 			//Cerrar el pop up 
@@ -92,7 +92,7 @@ public class utilities {
 		   }
 			
 //Scroll universal 
-		public  void scrollUniversal (){
+		public static  void scrollUniversal (){
 					
 			JavascriptExecutor js= (JavascriptExecutor) driver;
 			js.executeScript("window.scrollBy(0, 500);");
